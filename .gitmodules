@@ -1,0 +1,12 @@
+[submodule "Library-Metadata"]
+	path = Library-Metadata
+	url = git@github.com:bahaelaila7/Library-Metadata.git
+[submodule "Library-Utilities"]
+	path = Library-Utilities
+	url = git@github.com:bahaelaila7/Library-Utilities.git
+[submodule "Library-Core"]
+	path = Library-Core
+	url = git@github.com:bahaelaila7/Library-Core.git
+[submodule "Library-Spatial"]
+	path = Library-Spatial
+	url = git@github.com:bahaelaila7/Library-Spatial.git

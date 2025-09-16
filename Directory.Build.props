@@ -1,0 +1,7 @@
+<Project>
+  <PropertyGroup>
+    <!-- Put all outputs in ./artifacts/[Debug|Release] -->
+    <BaseOutputPath>$(MSBuildThisFileDirectory)artifacts\</BaseOutputPath>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+  </PropertyGroup>
+</Project>
