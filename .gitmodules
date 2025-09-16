@@ -7,6 +7,15 @@
 [submodule "Library-Core"]
 	path = Library-Core
 	url = git@github.com:bahaelaila7/Library-Core.git
+    branch = v8
 [submodule "Library-Spatial"]
 	path = Library-Spatial
 	url = git@github.com:bahaelaila7/Library-Spatial.git
+[submodule "Library-Datasets"]
+	path = Library-Datasets
+	url = git@github.com:bahaelaila7/Library-Datasets.git 
+	branch = v8
+[submodule "Core-Model-v8-LINUX"]
+	path = Core-Model-v8-LINUX
+	url = git@github.com:bahaelaila7/Core-Model-v8-LINUX.git
+	branch = main
