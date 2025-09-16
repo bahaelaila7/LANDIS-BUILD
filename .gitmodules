@@ -19,3 +19,21 @@
 	path = Core-Model-v8-LINUX
 	url = git@github.com:bahaelaila7/Core-Model-v8-LINUX.git
 	branch = main
+[submodule "Library-Climate"]
+	path = Library-Climate
+	url = git@github.com:bahaelaila7/Library-Climate.git
+[submodule "Library-Parameters"]
+	path = Library-Parameters
+	url = git@github.com:bahaelaila7/Library-Parameters.git
+[submodule "Library-Succession"]
+	path = Library-Succession
+	url = git@github.com:bahaelaila7/Library-Succession.git
+[submodule "Library-Universal-Cohort"]
+	path = Library-Universal-Cohort
+	url = git@github.com:bahaelaila7/Library-Universal-Cohort.git
+[submodule "Library-Initial-Community"]
+	path = Library-Initial-Community
+	url = git@github.com:bahaelaila7/Library-Initial-Community.git
+[submodule "Extension-Biomass-Succession"]
+	path = Extension-Biomass-Succession
+	url = git@github.com:bahaelaila7/Extension-Biomass-Succession.git
