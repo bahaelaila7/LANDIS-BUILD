@@ -37,3 +37,6 @@
 [submodule "Extension-Biomass-Succession"]
 	path = Extension-Biomass-Succession
 	url = git@github.com:bahaelaila7/Extension-Biomass-Succession.git
+[submodule "DensitySeedDispersal"]
+	path = DensitySeedDispersal
+	url = git@github.com:bahaelaila7/DesnitySeedDispersal.git
