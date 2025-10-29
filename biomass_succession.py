@@ -2,33 +2,82 @@ import numpy as np
 from dataclasses import dataclass
 from sortedcontainers import SortedKeyList
 
-RNG = np.random.default_rng(seed=111)
 SPECIES = 20
 MAPCODES = 20
 AGECLASSES = 60
 ECOREGIONS = 4
 
-TIMESTEP = 5
 
+# TIMESTEP = 5  # ignored, annual anyhow
+SEED = 111
+RNG = np.random.default_rng(seed=SEED)
+
+##########
+# LANDIS CORE SPECIES DATA
+##########
+LONGIVITY = np.full(SPECIES, 300)  # Longivity > 0 years
+# MATURITY = np.full(SPECIES, 20) # 0 < Sexual Maturity  < Longivity
+# SEED_DISP_MAX = np.full(SPECIES, 30) # Max Seed Dispersal >= 0 m
+# SEED_DISP_EFF = np.full(SPECIES, 30) # 0 <= Effective Seed Dispersal <= Max
+PROB_REPROD = np.full(SPECIES, 0.5)  # [0.0,1.0]
+SPROUT_AGE_MAX = np.full(SPECIES, 10)  # < Longivity
+SPROUT_AGE_MIN = np.full(SPECIES, 10)  # <= Max < Longivity
+POST_FIRE_REGEN = np.full(SPECIES, 0)  # {none=0, resprout=1, serotiny=2}
+
+
+##########
+# BIOMASS SUCCESSION CONSTS
+##########
 ANPP_LEAF_FRACTION = 0.35
-MAX_AGE = np.full(SPECIES, 300)  # Longivity >= 0
-LEAF_MAX_AGE = np.full(SPECIES, 3)  # LeafLongivity [1,10]
-DEF = np.full(SPECIES, 0.0)  # Defoliation [0.0,1.0]
-S = np.full(SPECIES, 0.5)  # GrowthCurve [0.0,1.0]
-D = np.full(SPECIES, 25)  # MortalityCurve [5.0, 25.0]
-WOOD_DECAY_RATE = np.full(SPECIES, 0.1)  # WoodDecayRate [0.
-B_MAX_SPP = np.full((SPECIES, ECOREGIONS), 10000)
-ANPP_MAX_SPP = np.full((SPECIES, ECOREGIONS), 200)
-ProbMort_SPP = np.full((SPECIES, ECOREGIONS), 0.03)
-AET = np.full((ECOREGIONS), 500)  # ActualEvapotranspiration [0,1000[ mm
+##########
+# BIOMASS SUCCESSION PARAMS
+###########
 SPINUP_MORTALITY_FRACTION = 0.1  # SpinupMortalityFraction [0.0,0.5]
 SPINUP_COHORTS = False
 
 
+# SPECIES
+LEAF_LONGIVITY = np.full(SPECIES, 3)  # LeafLongivity [1,10]
+LEAF_LIGNIN = np.full(SPECIES, 0.2)  # LeafLignin [0.0,1.0]
+DEF = np.full(SPECIES, 0.0)  # Defoliation [0.0,1.0]
+S = np.full(SPECIES, 0.5)  # GrowthCurve [0.0,1.0]
+D = np.full(SPECIES, 25)  # MortalityCurve [5.0, 25.0]
+WOOD_DECAY_RATE = np.full(SPECIES, 0.1)  # WoodDecayRate [0.0,1.0]
+SHADE_TOL = np.full(SPECIES, 1)  # Shade Tolerance 1,2,3,4,5
+# FIRE_TOL =np.full(SPECIES,1) # Shade Tolerance 1,2,3,4,5
+
+# SPECIESxECOREGION
+# TODO: YearXSpeciesXECOREGION to account for change in params due to climate
+B_MAX_SPP = np.full((SPECIES, ECOREGIONS), 10000)
+ANPP_MAX_SPP = np.full((SPECIES, ECOREGIONS), 200)
+PROB_MORT_SPP = np.full((SPECIES, ECOREGIONS), 0.03)
+PROB_ESTAB_SPP = np.full((SPECIES, ECOREGIONS), 0.03)
+
+##########
+# BIOMASS SUCCESSION LIFE HISTORY PARAMS
+###########
+
+# Actual Evapotranspiration (Ecoregion)
+# AET = np.full((ECOREGIONS), 500)  # ActualEvapotranspiration [0,1000[ mm
+
+# Min Relative Biomass (Ecoregion x Shadeclass)
+# np.full((ECOREGION, 5), 0.25)
+
+# Sufficient Light (Shade Class x Shade Class) -> Prob
+
+# Harvest effects
+# Table with Prescription (wildcards) x (CohortWoodReduction, CohortLeafReduction, DeadWoodReduction, DeadLitterReduction)
+# each being a probability [0.0,1.0]
+
+# Fire effects
+# Table with Severity (1-5) x (DeadWoodReduction, DeadLitterReduction)
+# each being a probability [0.0,1.0]
+
+
 @dataclass
 class Cohort:
-    age: int = 1
     species: int
+    age: int = 1
     biomass: float = 0.0
     anpp: float = 0.0
 
@@ -63,7 +112,7 @@ def make_site():
     return Site(cohorts=cs, B=B)
 
 
-def step(sites, current_time, spinup_mortality_fraction=0.0):
+def step(sites, current_time):
     for site in sites:
         growthReduction = site.growthReduction
         capacityReduction = site.capacityReduction
@@ -73,9 +122,9 @@ def step(sites, current_time, spinup_mortality_fraction=0.0):
         attrition = B_ij < 1e-8
         ANPP_ACT_ij = np.array([c.anpp for c in site.cohorts])
         AGE_ij = np.array([c.age for c in site.cohorts])
-        MAX_AGE_ij = np.array([MAX_AGE[c.species] for c in site.cohorts])
+        MAX_AGE_ij = np.array([LONGIVITY[c.species] for c in site.cohorts])
         senescence = AGE_ij >= MAX_AGE_ij
-        # LEAF_MAX_AGE_ij = np.array([LEAF_MAX_AGE[c.species] for c in site.cohorts])
+        # LEAF_MAX_AGE_ij = np.array([LEAF_LONGIVITY[c.species] for c in site.cohorts])
         # B_nonWoody = (ANPP_ACT_ij * ANPP_LEAF_FRACTION *LEAF_MAX_AGE_ij)
         # B_nonWoody = np.maximum(B_nonWoody, B_ij*0.025)
         # B_nonWoody = np.minimum(B_nonWoody, B_ij*ANPP_LEAF_FRACTION)
@@ -85,7 +134,7 @@ def step(sites, current_time, spinup_mortality_fraction=0.0):
         # #nonWoodyPercentage = 1.0-woodyPercentage
 
         AGE_ij = np.array([c.age for c in site.cohorts])
-        MAX_AGE_ij = np.array([MAX_AGE[c.species] for c in site.cohorts])
+        MAX_AGE_ij = np.array([LONGIVITY[c.species] for c in site.cohorts])
         AGE_ij += 1
         D_ij = np.array([D[c.species] for c in site.cohorts])
         ######################
@@ -107,8 +156,8 @@ def step(sites, current_time, spinup_mortality_fraction=0.0):
         M_AGE_ij = B_ij * np.exp(D_ij * (AGE_ij / MAX_AGE_ij - 1.0))
         M_AGE_ij = np.where(senescence, B_ij, M_AGE_ij)
         M_AGE_ij = np.clip(M_AGE_ij, a_max=B_ij, a_min=0.0)
-        if current_time <= 0 and spinup_mortality_fraction > 0:
-            M_AGE_ij += B_ij * spinup_mortality_fraction
+        if current_time <= 0 and SPINUP_MORTALITY_FRACTION > 0:
+            M_AGE_ij += B_ij * SPINUP_MORTALITY_FRACTION
         M_AGE_ij = np.clip(M_AGE_ij, a_max=B_ij, a_min=0.0)
         ######################
         # Biomass Potential Growth
@@ -235,7 +284,7 @@ def step(sites, current_time, spinup_mortality_fraction=0.0):
         #####################
         mortRNG_ij = RNG.uniform(size=len(site.cohorts))
         probM_ij = np.array(
-            [ProbMort_SPP[c.species, site.ecoregion] for c in site.cohorts]
+            [PROB_MORT_SPP[c.species, site.ecoregion] for c in site.cohorts]
         )
         M_TOT_ij = np.where(mortRNG_ij < probM_ij, B_ij, M_TOT_ij)
 
@@ -243,9 +292,7 @@ def step(sites, current_time, spinup_mortality_fraction=0.0):
         # Defoliation
         #####################
         defoliationFactor_ij = np.array([DEF[c.species] for c in site.cohorts])
-        defoliationLoss_ij = (
-            ANPP_LEAF_FRACTION * ANPP_ACT_ij * defoliationFactor_ij
-        )
+        defoliationLoss_ij = ANPP_LEAF_FRACTION * ANPP_ACT_ij * defoliationFactor_ij
         ######################
         # Shade
         #####################
