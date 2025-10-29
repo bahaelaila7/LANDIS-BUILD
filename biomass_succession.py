@@ -3,25 +3,34 @@ from dataclasses import dataclass
 from sortedcontainers import SortedKeyList
 
 RNG = np.random.default_rng(seed=111)
-LEAF_BIOMASS_PERCENTAGE = 0.35
 SPECIES = 20
 MAPCODES = 20
 AGECLASSES = 60
 ECOREGIONS = 4
-MAX_AGE = np.full(SPECIES, 300)
-DEF = np.full(SPECIES, 0.0)
-S = np.full(SPECIES, 0.5)
-D = np.full(SPECIES, 5)
+
+TIMESTEP = 5
+
+ANPP_LEAF_FRACTION = 0.35
+MAX_AGE = np.full(SPECIES, 300)  # Longivity >= 0
+LEAF_MAX_AGE = np.full(SPECIES, 3)  # LeafLongivity [1,10]
+DEF = np.full(SPECIES, 0.0)  # Defoliation [0.0,1.0]
+S = np.full(SPECIES, 0.5)  # GrowthCurve [0.0,1.0]
+D = np.full(SPECIES, 25)  # MortalityCurve [5.0, 25.0]
+WOOD_DECAY_RATE = np.full(SPECIES, 0.1)  # WoodDecayRate [0.
 B_MAX_SPP = np.full((SPECIES, ECOREGIONS), 10000)
-ANPP_MAX_SPP = np.full((SPECIES, ECOREGIONS), 300)
+ANPP_MAX_SPP = np.full((SPECIES, ECOREGIONS), 200)
 ProbMort_SPP = np.full((SPECIES, ECOREGIONS), 0.03)
+AET = np.full((ECOREGIONS), 500)  # ActualEvapotranspiration [0,1000[ mm
+SPINUP_MORTALITY_FRACTION = 0.1  # SpinupMortalityFraction [0.0,0.5]
+SPINUP_COHORTS = False
 
 
 @dataclass
 class Cohort:
-    age: int
+    age: int = 1
     species: int
-    biomass: float
+    biomass: float = 0.0
+    anpp: float = 0.0
 
 
 @dataclass
@@ -36,41 +45,67 @@ class Site:
     growthReduction: float = 0.0
     capacityReduction: float = 0.0
     AGNPP: float = 0.0
+    B: float = 0.0
     defoliationLoss: float = 0.0
 
 
 def make_cohort():
     species = RNG.integers(SPECIES)
     age = RNG.integers(AGECLASSES) * 5
-    biomass = np.exp(-((age - 40) ** 2) / (40**2)) * (0.5 + RNG.uniform() / 2) * 300
+    biomass = np.exp(-((age - 40) ** 2) / (40**2)) * (0.5 + RNG.uniform() / 2) * 100
     assert biomass > 0
     return Cohort(species=species, age=age, biomass=biomass)
 
 
 def make_site():
     cs = SortedKeyList((make_cohort() for _ in range(20)), lambda c: c.age)
-    return Site(cs)
+    B = sum(c.biomass for c in cs)
+    return Site(cohorts=cs, B=B)
 
 
 def step(sites, current_time, spinup_mortality_fraction=0.0):
     for site in sites:
         growthReduction = site.growthReduction
         capacityReduction = site.capacityReduction
+
+        B = site.B
+        B_ij = np.array([c.biomass for c in site.cohorts])
+        attrition = B_ij < 1e-8
+        ANPP_ACT_ij = np.array([c.anpp for c in site.cohorts])
+        AGE_ij = np.array([c.age for c in site.cohorts])
+        MAX_AGE_ij = np.array([MAX_AGE[c.species] for c in site.cohorts])
+        senescence = AGE_ij >= MAX_AGE_ij
+        # LEAF_MAX_AGE_ij = np.array([LEAF_MAX_AGE[c.species] for c in site.cohorts])
+        # B_nonWoody = (ANPP_ACT_ij * ANPP_LEAF_FRACTION *LEAF_MAX_AGE_ij)
+        # B_nonWoody = np.maximum(B_nonWoody, B_ij*0.025)
+        # B_nonWoody = np.minimum(B_nonWoody, B_ij*ANPP_LEAF_FRACTION)
+        # B_woody = B_ij - B_nonWoody
+        # updatePoolMasses
+        # #nonWoodyPercentage = B_nonWoody/B_ij
+        # #nonWoodyPercentage = 1.0-woodyPercentage
+
+        AGE_ij = np.array([c.age for c in site.cohorts])
+        MAX_AGE_ij = np.array([MAX_AGE[c.species] for c in site.cohorts])
+        AGE_ij += 1
+        D_ij = np.array([D[c.species] for c in site.cohorts])
         ######################
         # Site biomasses
         #####################
+        B = site.B
         B_ij = np.array([c.biomass for c in site.cohorts])
-        B = B_ij.sum()
         ######################
         # Age Related morality
         #####################
         # TODO spinup mortality fraction
-        M_AGE_ij = np.array(
-            [
-                c.biomass * np.exp(D[c.species] * (c.age / MAX_AGE[c.species] - 1))
-                for c in site.cohorts
-            ]
-        )
+        # M_AGE_ij = np.array(
+        #    [
+        #        c.biomass
+        #        * np.exp(D[c.species] * ((c.age + 1) / MAX_AGE[c.species] - 1))
+        #        for c in site.cohorts
+        #    ]
+        # )
+        M_AGE_ij = B_ij * np.exp(D_ij * (AGE_ij / MAX_AGE_ij - 1.0))
+        M_AGE_ij = np.where(senescence, B_ij, M_AGE_ij)
         M_AGE_ij = np.clip(M_AGE_ij, a_max=B_ij, a_min=0.0)
         if current_time <= 0 and spinup_mortality_fraction > 0:
             M_AGE_ij += B_ij * spinup_mortality_fraction
@@ -149,7 +184,7 @@ def step(sites, current_time, spinup_mortality_fraction=0.0):
         if growthReduction > 0.0:
             ANPP_ACT_ij *= 1.0 - site.growthReduction
 
-        site.AGNPP = ANPP_ACT_ij.sum()
+        AGNPP = ANPP_ACT_ij.sum()
 
         ######################
         # Development Mortality
@@ -209,7 +244,7 @@ def step(sites, current_time, spinup_mortality_fraction=0.0):
         #####################
         defoliationFactor_ij = np.array([DEF[c.species] for c in site.cohorts])
         defoliationLoss_ij = (
-            LEAF_BIOMASS_PERCENTAGE * ANPP_ACT_ij * defoliationFactor_ij
+            ANPP_LEAF_FRACTION * ANPP_ACT_ij * defoliationFactor_ij
         )
         ######################
         # Shade
@@ -218,17 +253,43 @@ def step(sites, current_time, spinup_mortality_fraction=0.0):
 
         dB_ij = ANPP_ACT_ij - M_TOT_ij - defoliationLoss_ij
         nB_ij = B_ij + dB_ij
+        #####################
+        # litter
+        #####################
 
+        # assert np.all((senesence * nB_ij).sum() < 1e-8)
+
+        ######################
+        # Updating site data
+        #####################
+
+        site.B = nB_ij.sum()
+        site.AGNPP = AGNPP
         site.defoliationLoss = defoliationLoss_ij.sum()
         site.prevYearMortality = M_TOT_ij.sum()
-        for b, c in zip(nB_ij, site.cohorts):
-            c.biomass = b
+        for b, a, c in zip(nB_ij, ANPP_ACT_ij, site.cohorts):
             c.age += 1
+            c.biomass = b
+            c.anpp = a
 
 
 if __name__ == "__main__":
     sites = [make_site() for _ in range(MAPCODES)]
     T0 = -200
     T1 = 100
+    from pprint import pprint
+    from collections import namedtuple
+
+    SiteRecord = namedtuple("Site", ["B", "AGNPP", "M_TOT", "DEF"])
+
     for current_time in range(T0, T1):
+        print(current_time)
         step(sites, current_time)
+        pprint(
+            [
+                SiteRecord(
+                    site.B, site.AGNPP, site.prevYearMortality, site.defoliationLoss
+                )
+                for site in sites
+            ]
+        )
