@@ -49,6 +49,7 @@ SHADE_TOL = np.full(SPECIES, 1)  # Shade Tolerance 1,2,3,4,5
 # SPECIESxECOREGION
 # TODO: YearXSpeciesXECOREGION to account for change in params due to climate
 B_MAX_SPP = np.full((SPECIES, ECOREGIONS), 10000)
+B_MAX_ECO = B_MAX_SPP.max(axis=0)
 ANPP_MAX_SPP = np.full((SPECIES, ECOREGIONS), 200)
 PROB_MORT_SPP = np.full((SPECIES, ECOREGIONS), 0.03)
 PROB_ESTAB_SPP = np.full((SPECIES, ECOREGIONS), 0.03)
@@ -61,7 +62,8 @@ PROB_ESTAB_SPP = np.full((SPECIES, ECOREGIONS), 0.03)
 # AET = np.full((ECOREGIONS), 500)  # ActualEvapotranspiration [0,1000[ mm
 
 # Min Relative Biomass (Ecoregion x Shadeclass)
-# np.full((ECOREGION, 5), 0.25)
+# ratio of B_ACT / B_MAX[eco] determining shade class
+MIN_REL_BIOMASS = np.array([[0.25, 0.45, 0.56, 0.70, 0.90] for _ in range(ECOREGIONS)])
 
 # Sufficient Light (Shade Class x Shade Class) -> Prob
 
@@ -293,10 +295,6 @@ def step(sites, current_time):
         #####################
         defoliationFactor_ij = np.array([DEF[c.species] for c in site.cohorts])
         defoliationLoss_ij = ANPP_LEAF_FRACTION * ANPP_ACT_ij * defoliationFactor_ij
-        ######################
-        # Shade
-        #####################
-        # TODO
 
         dB_ij = ANPP_ACT_ij - M_TOT_ij - defoliationLoss_ij
         nB_ij = B_ij + dB_ij
@@ -307,6 +305,19 @@ def step(sites, current_time):
         # assert np.all((senesence * nB_ij).sum() < 1e-8)
 
         ######################
+        # Shade
+        #####################
+        B_ACT = (nB_ij * (AGE_ij > 5)).sum()
+        B_ACT = min(B_ACT, B_MAX_ECO[site.ecoregion] - site.prevYearMortality)
+        B_AM = B_ACT / B_MAX_ECO[site.ecoregion]
+        SHADE_cond = B_AM >= MIN_REL_BIOMASS[site.ecoregion]
+        SHADECLASS = (
+            SHADE_cond.size - 1 - np.argmax(SHADE_cond[::-1])
+            if np.any(SHADE_cond)
+            else 0
+        )
+
+        ######################
         # Updating site data
         #####################
 
@@ -314,10 +325,11 @@ def step(sites, current_time):
         site.AGNPP = AGNPP
         site.defoliationLoss = defoliationLoss_ij.sum()
         site.prevYearMortality = M_TOT_ij.sum()
-        for b, a, c in zip(nB_ij, ANPP_ACT_ij, site.cohorts):
+        site.shade = SHADECLASS
+        for biomass, anpp, c in zip(nB_ij, ANPP_ACT_ij, site.cohorts):
             c.age += 1
-            c.biomass = b
-            c.anpp = a
+            c.biomass = biomass
+            c.anpp = anpp
 
 
 if __name__ == "__main__":
