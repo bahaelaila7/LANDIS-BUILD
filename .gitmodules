@@ -40,3 +40,21 @@
 [submodule "DensitySeedDispersal"]
 	path = DensitySeedDispersal
 	url = git@github.com:bahaelaila7/DesnitySeedDispersal.git
+[submodule "Extension-Biomass-Harvest"]
+	path = Extension-Biomass-Harvest
+	url = git@github.com:bahaelaila7/Extension-Biomass-Harvest.git
+[submodule "Extension-Base-Fire"]
+	path = Extension-Base-Fire
+	url = git@github.com:bahaelaila7/Extension-Base-Fire.git
+[submodule "Extension-Base-Wind"]
+	path = Extension-Base-Wind
+	url = git@github.com:bahaelaila7/Extension-Base-Wind.git
+[submodule "Library-Harvest-Mgmt"]
+	path = Library-Harvest-Mgmt
+	url = git@github.com:bahaelaila7/Library-Harvest-Mgmt.git
+[submodule "Library-Site-Harvest"]
+	path = Library-Site-Harvest
+	url = git@github.com:bahaelaila7/Library-Site-Harvest.git
+[submodule "Library-Biomass-Harvest"]
+	path = Library-Biomass-Harvest
+	url = git@github.com:bahaelaila7/Library-Biomass-Harvest.git
