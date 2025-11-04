@@ -58,3 +58,6 @@
 [submodule "Library-Biomass-Harvest"]
 	path = Library-Biomass-Harvest
 	url = git@github.com:bahaelaila7/Library-Biomass-Harvest.git
+[submodule "Extension-Output-Biomass"]
+	path = Extension-Output-Biomass
+	url = git@github.com:bahaelaila7/Extension-Output-Biomass.git

@@ -19,5 +19,7 @@ dotnet "$EXTENSION_ADMIN" add "./Extension-Biomass-Succession/deploy/installer/B
 ./add_extension_to_deps.py --json-path "${DEPS_PATH}" --extension-dll "${EXTENSIONS_PATH}/Landis.Extension.Succession.Biomass-v7.dll"
 dotnet "$EXTENSION_ADMIN" add "./Extension-Biomass-Harvest/deploy/installer/Biomass Harvest 6.txt"
 ./add_extension_to_deps.py --json-path "${DEPS_PATH}" --extension-dll "${EXTENSIONS_PATH}/Landis.Extension.BiomassHarvest-v6.dll"
+dotnet "$EXTENSION_ADMIN" add "./Extension-Output-Biomass/deploy/installer/Output Biomass 4.txt"
+./add_extension_to_deps.py --json-path "${DEPS_PATH}" --extension-dll "${EXTENSIONS_PATH}/Landis.Extension.Output.Biomass-v4.dll"
 
 #cp Landis.Console.deps.json "${PUBLISH_PATH}/"
