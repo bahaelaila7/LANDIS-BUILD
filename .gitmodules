@@ -64,3 +64,15 @@
 [submodule "Extension-SOSIEL-Harvest"]
 	path = Extension-SOSIEL-Harvest
 	url = git@github.com:bahaelaila7/Extension-SOSIEL-Harvest.git
+[submodule "Extension-Land-Use-Plus"]
+	path = Extension-Land-Use-Plus
+	url = git@github.com:bahaelaila7/Extension-Land-Use-Plus.git
+[submodule "Extension-ForCS-Succession"]
+	path = Extension-ForCS-Succession
+	url = git@github.com:bahaelaila7/Extension-ForCS-Succession.git
+[submodule "Extension-DGS-Succession"]
+	path = Extension-DGS-Succession
+	url = git@github.com:bahaelaila7/Extension-DGS-Succession.git
+[submodule "Extension-NECN-Succession"]
+	path = Extension-NECN-Succession
+	url = git@github.com:bahaelaila7/Extension-NECN-Succession.git
