@@ -1,0 +1,506 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v8.0/linux-x64",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v8.0": {},
+    ".NETCoreApp,Version=v8.0/linux-x64": {
+      "Landis.Console/8.0.0": {
+        "dependencies": {
+          "Landis.Core": "3.0.1",
+          "Landis.Core.Implementation": "3.0.1",
+          "Landis.Extensions": "8.0.0",
+          "Landis.Extensions.Dataset": "2.0.1",
+          "Landis.Landscapes": "2.0.1",
+          "Landis.Library.Metadata-v2": "2.1.0",
+          "Landis.RasterIO": "2.0.1",
+          "Landis.RasterIO.Gdal": "2.0.1",
+          "Landis.SpatialModeling": "2.0.1",
+          "Landis.Utilities": "2.0.0",
+          "Landis.Extensions.Dataset.Reference": "2.0.1.0",
+          "Landis.Extensions.Reference": "8.0.0.0",
+          "Landis.Landscapes.Reference": "2.0.1.0",
+          "Landis.Library.Metadata-v2.Reference": "2.1.0.0",
+          "Landis.RasterIO.Reference": "2.0.1.0",
+          "Landis.RasterIO.Gdal.Reference": "2.0.1.0",
+          "Landis.SpatialModeling.Reference": "2.0.1.0",
+          "Landis.Extension.Succession.Biomass-v7": "7.1.0.0"
+        },
+        "runtime": {
+          "Landis.Console.dll": {}
+        }
+      },
+      "Gdal.Core/1.0.0": {
+        "runtime": {
+          "lib/netstandard2.0/Gdal.Core.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        },
+        "native": {
+          "runtimes/linux-x64/native/gdal_wrap.so": {
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/linux-x64/native/gdalconst_wrap.so": {
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/linux-x64/native/libgdal.so.20": {
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/linux-x64/native/ogr_wrap.so": {
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/linux-x64/native/osr_wrap.so": {
+            "fileVersion": "0.0.0.0"
+          }
+        }
+      },
+      "log4net/2.0.14": {
+        "dependencies": {
+          "System.Configuration.ConfigurationManager": "4.5.0"
+        },
+        "runtime": {
+          "lib/netstandard2.0/log4net.dll": {
+            "assemblyVersion": "2.0.14.0",
+            "fileVersion": "2.0.14.0"
+          }
+        }
+      },
+      "Microsoft.Extensions.DependencyModel/8.0.1": {
+        "dependencies": {
+          "System.Text.Encodings.Web": "8.0.0",
+          "System.Text.Json": "8.0.4"
+        },
+        "runtime": {
+          "lib/net8.0/Microsoft.Extensions.DependencyModel.dll": {
+            "assemblyVersion": "8.0.0.1",
+            "fileVersion": "8.0.724.31311"
+          }
+        }
+      },
+      "Microsoft.NETCore.Platforms/2.0.0": {},
+      "System.Configuration.ConfigurationManager/4.5.0": {
+        "dependencies": {
+          "System.Security.Cryptography.ProtectedData": "4.5.0",
+          "System.Security.Permissions": "4.5.0"
+        },
+        "runtime": {
+          "lib/netstandard2.0/System.Configuration.ConfigurationManager.dll": {
+            "assemblyVersion": "4.0.1.0",
+            "fileVersion": "4.6.26515.6"
+          }
+        }
+      },
+      "System.Security.AccessControl/4.5.0": {
+        "dependencies": {
+          "Microsoft.NETCore.Platforms": "2.0.0",
+          "System.Security.Principal.Windows": "4.5.0"
+        }
+      },
+      "System.Security.Cryptography.ProtectedData/4.5.0": {
+        "runtime": {
+          "lib/netstandard2.0/System.Security.Cryptography.ProtectedData.dll": {
+            "assemblyVersion": "4.0.3.0",
+            "fileVersion": "4.6.26515.6"
+          }
+        }
+      },
+      "System.Security.Permissions/4.5.0": {
+        "dependencies": {
+          "System.Security.AccessControl": "4.5.0"
+        },
+        "runtime": {
+          "lib/netstandard2.0/System.Security.Permissions.dll": {
+            "assemblyVersion": "4.0.1.0",
+            "fileVersion": "4.6.26515.6"
+          }
+        }
+      },
+      "System.Security.Principal.Windows/4.5.0": {
+        "dependencies": {
+          "Microsoft.NETCore.Platforms": "2.0.0"
+        }
+      },
+      "System.Text.Encodings.Web/8.0.0": {},
+      "System.Text.Json/8.0.4": {
+        "dependencies": {
+          "System.Text.Encodings.Web": "8.0.0"
+        }
+      },
+      "Troschuetz.Random/4.3.0": {
+        "runtime": {
+          "lib/netstandard2.0/Troschuetz.Random.dll": {
+            "assemblyVersion": "4.0.0.0",
+            "fileVersion": "4.3.0.151"
+          }
+        }
+      },
+      "Landis.Core/3.0.1": {
+        "dependencies": {
+          "Landis.SpatialModeling": "2.0.1",
+          "Landis.Utilities": "2.0.0",
+          "Troschuetz.Random": "4.3.0",
+          "log4net": "2.0.14"
+        },
+        "runtime": {
+          "Landis.Core.dll": {
+            "assemblyVersion": "3.0.1",
+            "fileVersion": "3.0.1.0"
+          }
+        }
+      },
+      "Landis.Core.Implementation/3.0.1": {
+        "dependencies": {
+          "Landis.Core": "3.0.1",
+          "Landis.Library.Metadata-v2": "2.1.0"
+        },
+        "runtime": {
+          "Landis.Core.Implementation.dll": {
+            "assemblyVersion": "3.0.1",
+            "fileVersion": "3.0.1.0"
+          }
+        }
+      },
+      "Landis.Extensions/8.0.0": {
+        "dependencies": {
+          "Landis.Core": "3.0.1",
+          "Landis.Extensions.Dataset": "2.0.1",
+          "Landis.SpatialModeling": "2.0.1",
+          "Landis.Utilities": "2.0.0",
+          "Microsoft.Extensions.DependencyModel": "8.0.1"
+        },
+        "runtime": {
+          "Landis.Extensions.dll": {
+            "assemblyVersion": "8.0.0",
+            "fileVersion": ""
+          }
+        }
+      },
+      "Landis.Extensions.Dataset/2.0.1": {
+        "dependencies": {
+          "Landis.Core": "3.0.1"
+        },
+        "runtime": {
+          "Landis.Extensions.Dataset.dll": {
+            "assemblyVersion": "2.0.1",
+            "fileVersion": ""
+          }
+        }
+      },
+      "Landis.Landscapes/2.0.1": {
+        "dependencies": {
+          "Landis.SpatialModeling": "2.0.1"
+        },
+        "runtime": {
+          "Landis.Landscapes.dll": {
+            "assemblyVersion": "2.0.1",
+            "fileVersion": ""
+          }
+        }
+      },
+      "Landis.Library.Metadata-v2/2.1.0": {
+        "dependencies": {
+          "Landis.Core": "3.0.1"
+        },
+        "runtime": {
+          "Landis.Library.Metadata-v2.dll": {
+            "assemblyVersion": "2.1.0",
+            "fileVersion": ""
+          }
+        }
+      },
+      "Landis.RasterIO/2.0.1": {
+        "dependencies": {
+          "Landis.SpatialModeling": "2.0.1"
+        },
+        "runtime": {
+          "Landis.RasterIO.dll": {
+            "assemblyVersion": "2.0.1",
+            "fileVersion": ""
+          }
+        }
+      },
+      "Landis.RasterIO.Gdal/2.0.1": {
+        "dependencies": {
+          "Gdal.Core": "1.0.0",
+          "Landis.RasterIO": "2.0.1",
+          "Landis.SpatialModeling": "2.0.1"
+        },
+        "runtime": {
+          "Landis.RasterIO.Gdal.dll": {
+            "assemblyVersion": "2.0.1",
+            "fileVersion": ""
+          }
+        }
+      },
+      "Landis.SpatialModeling/2.0.1": {
+        "runtime": {
+          "Landis.SpatialModeling.dll": {
+            "assemblyVersion": "2.0.1",
+            "fileVersion": ""
+          }
+        }
+      },
+      "Landis.Utilities/2.0.0": {
+        "dependencies": {
+          "Microsoft.Extensions.DependencyModel": "8.0.1"
+        },
+        "runtime": {
+          "Landis.Utilities.dll": {
+            "assemblyVersion": "2.0.0",
+            "fileVersion": "2.0.0"
+          }
+        }
+      },
+      "Landis.Extensions.Dataset.Reference/2.0.1.0": {
+        "runtime": {
+          "Landis.Extensions.Dataset.dll": {
+            "assemblyVersion": "2.0.1.0",
+            "fileVersion": "7.0.0.0"
+          }
+        }
+      },
+      "Landis.Extensions.Reference/8.0.0.0": {
+        "runtime": {
+          "Landis.Extensions.dll": {
+            "assemblyVersion": "8.0.0.0",
+            "fileVersion": "8.0.0.0"
+          }
+        }
+      },
+      "Landis.Landscapes.Reference/2.0.1.0": {
+        "runtime": {
+          "Landis.Landscapes.dll": {
+            "assemblyVersion": "2.0.1.0",
+            "fileVersion": "2.0.1.0"
+          }
+        }
+      },
+      "Landis.Library.Metadata-v2.Reference/2.1.0.0": {
+        "runtime": {
+          "Landis.Library.Metadata-v2.dll": {
+            "assemblyVersion": "2.1.0.0",
+            "fileVersion": "2.1.0.0"
+          }
+        }
+      },
+      "Landis.RasterIO.Reference/2.0.1.0": {
+        "runtime": {
+          "Landis.RasterIO.dll": {
+            "assemblyVersion": "2.0.1.0",
+            "fileVersion": "2.0.1.0"
+          }
+        }
+      },
+      "Landis.RasterIO.Gdal.Reference/2.0.1.0": {
+        "runtime": {
+          "Landis.RasterIO.Gdal.dll": {
+            "assemblyVersion": "2.0.1.0",
+            "fileVersion": "2.0.1.0"
+          }
+        }
+      },
+      "Landis.SpatialModeling.Reference/2.0.1.0": {
+        "runtime": {
+          "Landis.SpatialModeling.dll": {
+            "assemblyVersion": "2.0.1.0",
+            "fileVersion": "2.0.1.0"
+          }
+        }
+      },
+      "Landis.Extension.Succession.Biomass-v7/7.1.0.0": {
+        "runtime": {
+          "extensions/Landis.Extension.Succession.Biomass-v7.dll": {
+            "assemblyVersion": "7.1.0.0",
+            "fileVersion": "7.1.0.0"
+          }
+        }
+      }
+
+    }
+  },
+  "libraries": {
+    "Landis.Console/8.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Gdal.Core/1.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-Bbo5jKeDvxDrqEVszn3SMM+QyUrV4n+P9kmbwkSJoCIK45JdHOP1y/VZKSyk7Kyeu77RqBFruhR51GuHJJ28vg==",
+      "path": "gdal.core/1.0.0",
+      "hashPath": "gdal.core.1.0.0.nupkg.sha512"
+    },
+    "log4net/2.0.14": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-KevyXUuhOyhx7l1jWwq6ZGVlRC2Aetg0qDp6rJpfSZGcDPKQDwfOE6yEuVkVf0kEP08NQqBDn/TQ/TJv4wgyhw==",
+      "path": "log4net/2.0.14",
+      "hashPath": "log4net.2.0.14.nupkg.sha512"
+    },
+    "Microsoft.Extensions.DependencyModel/8.0.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-5Ou6varcxLBzQ+Agfm0k0pnH7vrEITYlXMDuE6s7ZHlZHz6/G8XJ3iISZDr5rfwfge6RnXJ1+Wc479mMn52vjA==",
+      "path": "microsoft.extensions.dependencymodel/8.0.1",
+      "hashPath": "microsoft.extensions.dependencymodel.8.0.1.nupkg.sha512"
+    },
+    "Microsoft.NETCore.Platforms/2.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-VdLJOCXhZaEMY7Hm2GKiULmn7IEPFE4XC5LPSfBVCUIA8YLZVh846gtfBJalsPQF2PlzdD7ecX7DZEulJ402ZQ==",
+      "path": "microsoft.netcore.platforms/2.0.0",
+      "hashPath": "microsoft.netcore.platforms.2.0.0.nupkg.sha512"
+    },
+    "System.Configuration.ConfigurationManager/4.5.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-UIFvaFfuKhLr9u5tWMxmVoDPkFeD+Qv8gUuap4aZgVGYSYMdERck4OhLN/2gulAc0nYTEigWXSJNNWshrmxnng==",
+      "path": "system.configuration.configurationmanager/4.5.0",
+      "hashPath": "system.configuration.configurationmanager.4.5.0.nupkg.sha512"
+    },
+    "System.Security.AccessControl/4.5.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-vW8Eoq0TMyz5vAG/6ce483x/CP83fgm4SJe5P8Tb1tZaobcvPrbMEL7rhH1DRdrYbbb6F0vq3OlzmK0Pkwks5A==",
+      "path": "system.security.accesscontrol/4.5.0",
+      "hashPath": "system.security.accesscontrol.4.5.0.nupkg.sha512"
+    },
+    "System.Security.Cryptography.ProtectedData/4.5.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-wLBKzFnDCxP12VL9ANydSYhk59fC4cvOr9ypYQLPnAj48NQIhqnjdD2yhP8yEKyBJEjERWS9DisKL7rX5eU25Q==",
+      "path": "system.security.cryptography.protecteddata/4.5.0",
+      "hashPath": "system.security.cryptography.protecteddata.4.5.0.nupkg.sha512"
+    },
+    "System.Security.Permissions/4.5.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-9gdyuARhUR7H+p5CjyUB/zPk7/Xut3wUSP8NJQB6iZr8L3XUXTMdoLeVAg9N4rqF8oIpE7MpdqHdDHQ7XgJe0g==",
+      "path": "system.security.permissions/4.5.0",
+      "hashPath": "system.security.permissions.4.5.0.nupkg.sha512"
+    },
+    "System.Security.Principal.Windows/4.5.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-U77HfRXlZlOeIXd//Yoj6Jnk8AXlbeisf1oq1os+hxOGVnuG+lGSfGqTwTZBoORFF6j/0q7HXIl8cqwQ9aUGqQ==",
+      "path": "system.security.principal.windows/4.5.0",
+      "hashPath": "system.security.principal.windows.4.5.0.nupkg.sha512"
+    },
+    "System.Text.Encodings.Web/8.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-yev/k9GHAEGx2Rg3/tU6MQh4HGBXJs70y7j1LaM1i/ER9po+6nnQ6RRqTJn1E7Xu0fbIFK80Nh5EoODxrbxwBQ==",
+      "path": "system.text.encodings.web/8.0.0",
+      "hashPath": "system.text.encodings.web.8.0.0.nupkg.sha512"
+    },
+    "System.Text.Json/8.0.4": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-bAkhgDJ88XTsqczoxEMliSrpijKZHhbJQldhAmObj/RbrN3sU5dcokuXmWJWsdQAhiMJ9bTayWsL1C9fbbCRhw==",
+      "path": "system.text.json/8.0.4",
+      "hashPath": "system.text.json.8.0.4.nupkg.sha512"
+    },
+    "Troschuetz.Random/4.3.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-MwfN3xAyJGGLPyFO0W7cq+jZ7RvSQWs93Jr+QWnLETC/FigyvrBp/NSRs/UpSmkmc03V0tyngppwxbA/3qmgQg==",
+      "path": "troschuetz.random/4.3.0",
+      "hashPath": "troschuetz.random.4.3.0.nupkg.sha512"
+    },
+    "Landis.Core/3.0.1": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Landis.Core.Implementation/3.0.1": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Landis.Extensions/8.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Landis.Extensions.Dataset/2.0.1": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Landis.Landscapes/2.0.1": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Landis.Library.Metadata-v2/2.1.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Landis.RasterIO/2.0.1": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Landis.RasterIO.Gdal/2.0.1": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Landis.SpatialModeling/2.0.1": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Landis.Utilities/2.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Landis.Extensions.Dataset.Reference/2.0.1.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Landis.Extensions.Reference/8.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Landis.Landscapes.Reference/2.0.1.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Landis.Library.Metadata-v2.Reference/2.1.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Landis.RasterIO.Reference/2.0.1.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Landis.RasterIO.Gdal.Reference/2.0.1.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Landis.SpatialModeling.Reference/2.0.1.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Landis.Extension.Succession.Biomass-v7/7.1.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": "",
+      "path":"extensions/Landis.Extension.Succession.Biomass-v7.dll" 
+    }
+  }
+}
