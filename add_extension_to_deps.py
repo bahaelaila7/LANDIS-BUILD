@@ -102,5 +102,5 @@ if __name__ == "__main__":
 
     json_dict["libraries"][assembly_canonical_name] = library_entry
 
-    with open(f"{args.json_path}.test", "w") as jf:
+    with open(args.json_path, "w") as jf:
         json.dump(json_dict, jf, indent=4)

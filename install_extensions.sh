@@ -6,14 +6,18 @@ PUBLISH_LINUX_PATH="$ARTIFACTS_BASE/linux-x64/publish"
 mv "${PUBLISH_PATH}" "${EXTENSIONS_PATH}"
 mv "${PUBLISH_LINUX_PATH}" "${PUBLISH_PATH}"
 EXTENSION_ADMIN="${PUBLISH_PATH}/Landis.Extensions.dll"
+DEPS_PATH="${PUBLISH_PATH}/Landis.Console.deps.json"
 cp extensions.xml "$EXTENSIONS_PATH"
-
-echo dotnet "$EXTENSION_ADMIN" list
+cp -r "${EXTENSIONS_PATH}" "${PUBLISH_PATH}/"
+EXTENSIONS_PATH="$PUBLISH_PATH/extensions"
 dotnet "$EXTENSION_ADMIN" list
 dotnet "$EXTENSION_ADMIN" add "./Extension-Base-Fire/deploy/installer/Original Fire 5.txt"
+./add_extension_to_deps.py --json-path "${DEPS_PATH}" --extension-dll "${EXTENSIONS_PATH}/Landis.Extension.OriginalFire-v5.dll"
 dotnet "$EXTENSION_ADMIN" add "./Extension-Base-Wind/deploy/installer/Original Wind 4.txt"
+./add_extension_to_deps.py --json-path "${DEPS_PATH}" --extension-dll "${EXTENSIONS_PATH}/Landis.Extension.OriginalWind-v4.dll"
 dotnet "$EXTENSION_ADMIN" add "./Extension-Biomass-Succession/deploy/installer/Biomass Succession 7.txt"
+./add_extension_to_deps.py --json-path "${DEPS_PATH}" --extension-dll "${EXTENSIONS_PATH}/Landis.Extension.Succession.Biomass-v7.dll"
 dotnet "$EXTENSION_ADMIN" add "./Extension-Biomass-Harvest/deploy/installer/Biomass Harvest 6.txt"
+./add_extension_to_deps.py --json-path "${DEPS_PATH}" --extension-dll "${EXTENSIONS_PATH}/Landis.Extension.BiomassHarvest-v6.dll"
 
-cp -r "${EXTENSIONS_PATH}" "${PUBLISH_PATH}/"
-cp Landis.Console.deps.json "${PUBLISH_PATH}/"
+#cp Landis.Console.deps.json "${PUBLISH_PATH}/"
