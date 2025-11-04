@@ -61,3 +61,6 @@
 [submodule "Extension-Output-Biomass"]
 	path = Extension-Output-Biomass
 	url = git@github.com:bahaelaila7/Extension-Output-Biomass.git
+[submodule "Extension-SOSIEL-Harvest"]
+	path = Extension-SOSIEL-Harvest
+	url = git@github.com:bahaelaila7/Extension-SOSIEL-Harvest.git
