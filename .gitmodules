@@ -76,3 +76,33 @@
 [submodule "Extension-NECN-Succession"]
 	path = Extension-NECN-Succession
 	url = git@github.com:bahaelaila7/Extension-NECN-Succession.git
+[submodule "Extension-Base-BDA"]
+	path = Extension-Base-BDA
+	url = git@github.com:bahaelaila7/Extension-Base-BDA.git
+[submodule "Extension-Output-Wildlife-Habitat"]
+	path = Extension-Output-Wildlife-Habitat
+	url = git@github.com:bahaelaila7/Extension-Output-Wildlife-Habitat.git
+[submodule "Extension-Output-Biomass-Community"]
+	path = Extension-Output-Biomass-Community
+	url = git@github.com:bahaelaila7/Extension-Output-Biomass-Community.git
+[submodule "Extension-Base-EDA"]
+	path = Extension-Base-EDA
+	url = git@github.com:bahaelaila7/Extension-Base-EDA.git
+[submodule "Extension-Local-Habitat-Suitability-Output"]
+	path = Extension-Local-Habitat-Suitability-Output
+	url = git@github.com:bahaelaila7/Extension-Local-Habitat-Suitability-Output.git
+[submodule "Extension-Dynamic-Biomass-Fuels"]
+	path = Extension-Dynamic-Biomass-Fuels
+	url = git@github.com:bahaelaila7/Extension-Dynamic-Biomass-Fuels.git
+[submodule "Extension-Dynamic-Fire-System"]
+	path = Extension-Dynamic-Fire-System
+	url = git@github.com:bahaelaila7/Extension-Dynamic-Fire-System.git
+[submodule "Extension-Social-Climate-Fire"]
+	path = Extension-Social-Climate-Fire
+	url = git@github.com:bahaelaila7/Extension-Social-Climate-Fire.git
+[submodule "Extension-LinearWind"]
+	path = Extension-LinearWind
+	url = git@github.com:bahaelaila7/Extension-LinearWind.git
+[submodule "Extension-Biomass-Hurricane"]
+	path = Extension-Biomass-Hurricane
+	url = git@github.com:bahaelaila7/Extension-Biomass-Hurricane.git
