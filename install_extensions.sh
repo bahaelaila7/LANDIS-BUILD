@@ -1,5 +1,6 @@
 #!/bin/sh
-ARTIFACTS_BASE="./artifacts/Release"
+BUILD="$@"
+ARTIFACTS_BASE="./artifacts/${BUILD}"
 EXTENSIONS_PATH="$ARTIFACTS_BASE/extensions"
 PUBLISH_PATH="$ARTIFACTS_BASE/publish"
 PUBLISH_LINUX_PATH="$ARTIFACTS_BASE/linux-x64/publish"
@@ -10,6 +11,9 @@ DEPS_PATH="${PUBLISH_PATH}/Landis.Console.deps.json"
 cp extensions.xml "$EXTENSIONS_PATH"
 cp -r "${EXTENSIONS_PATH}" "${PUBLISH_PATH}/"
 EXTENSIONS_PATH="$PUBLISH_PATH/extensions"
+if [ "${BUILD}" == "Debug" ]; then
+    sed -i 's|<level\s\+value="INFO"\s\+/>|<level value="DEBUG" />|' "${PUBLISH_PATH}/Landis.Console.dll.config"
+fi;
 #dotnet "$EXTENSION_ADMIN" add "./Extension-Base-Fire/deploy/installer/Original Fire 5.txt"
 #./add_extension_to_deps.py --json-path "${DEPS_PATH}" --extension-dll "${EXTENSIONS_PATH}/Landis.Extension.OriginalFire-v5.dll"
 #dotnet "$EXTENSION_ADMIN" add "./Extension-Base-Wind/deploy/installer/Original Wind 4.txt"
